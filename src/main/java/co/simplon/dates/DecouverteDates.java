@@ -1,9 +1,13 @@
 package co.simplon.dates;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 
 public class DecouverteDates {
 
@@ -12,33 +16,29 @@ public class DecouverteDates {
 	}
 
 	public boolean estInferieurDateCourante(LocalDate date) throws ParseException {
-		// TODO
-		throw new RuntimeException("à implémenter");
-	}
+		return date.isBefore(LocalDate.now());
+	} // estInferieurDateCourante
 
 	public LocalDate construireDate(String chaineFournie) {
-		// TODO
-		throw new RuntimeException("à implémenter");
-	}
+		return LocalDate.parse(chaineFournie, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+	} // construireDate
 
 	public LocalDateTime augmenterDate(LocalDateTime dateInitiale, int nombreJours,
 			int nombreHeures, int nombreMinutes) {
-		// TODO
-		throw new RuntimeException("à implémenter");
-	}
+		return dateInitiale.plusDays(nombreJours).plusHours(nombreHeures).plusMinutes(nombreMinutes);
+	} // augmenterDate
 
 	public String formaterUneDate(LocalDate date) {
-		// TODO
-		return "";
-	}
+		return date.format(DateTimeFormatter.ofPattern("dd_MM_yyyy"));
+	} // formaterUneDate
 
 	public String formaterUneHeure(LocalTime time) {
-		// TODO
-		return "";
-	}
+		return time.format(DateTimeFormatter.ofPattern("HH'h'mm'min'ss'sec'"));
+	} // formaterUneHeure
 	
 	public String formaterDateEnFrancais(LocalDate date) {
-		// TODO
-		return "";
-	}
+System.out.println(date.format(DateTimeFormatter.ofPattern(" dd LLL yyyy")));
+		
+		return date.format(DateTimeFormatter.ofLocalizedDate( FormatStyle.FULL ).withLocale(Locale.FRANCE));
+	} // formaterDateEnFrancais
 }
